@@ -8,19 +8,19 @@
 pip install -r requirements.txt
 ```
 
-## Run unit tests
+### Run unit tests
 
 ```shell
 python -m unittest discover -s ./tests -p *_test.py
 ```
 
-## Run integration tests
+### Run integration tests
 
 ```shell
 python -m unittest discover -s ./tests -p *_it.py
 ```
 
-## Run behave (Cucumber) integration tests
+### Run behave (Cucumber) integration tests
 
 ```shell
 behave
