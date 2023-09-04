@@ -1,5 +1,7 @@
 import json
 
+import yaml
+
 
 def trim_list(strings_list):
     fragments = [fragment.strip() for fragment in strings_list]
@@ -42,4 +44,13 @@ def json_to_object(text: str, default_value={}):
     try:
         return json.loads(text)
     except (json.JSONDecodeError, TypeError):
+        return None
+
+
+def yaml_to_object(text: str, default_value={}):
+    if text is None:
+        return default_value
+    try:
+        return yaml.safe_load(text)
+    except (yaml.YAMLError):
         return None
