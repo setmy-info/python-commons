@@ -33,4 +33,4 @@ Feature: Testing Environment Variables
     Scenario: Getting JSON string environment variable
         Given environment variable "TEST_ENVIRONMENT_VARIABLE_8" have value " { "name":    "John",   "age": 30, "city": "New York"}"
         When getting "TEST_ENVIRONMENT_VARIABLE_8" as JSON
-        Then I should get JSON "{"name": "John", "age": 30, "city": "New York"}"
+        Then I should get JSON "{"age":30,"city":"New York","name":"John"}"
