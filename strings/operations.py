@@ -1,3 +1,6 @@
+import json
+
+
 def trim_list(strings_list):
     fragments = [fragment.strip() for fragment in strings_list]
     return fragments
@@ -31,3 +34,12 @@ def to_float(text: str, default_value=0.0):
         return float(text)
     except (ValueError, TypeError):
         return default_value
+
+
+def json_to_object(text: str, default_value={}):
+    if text is None:
+        return default_value
+    try:
+        return json.loads(text)
+    except (json.JSONDecodeError, TypeError):
+        return None

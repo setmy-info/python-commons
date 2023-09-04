@@ -29,3 +29,8 @@ Feature: Testing Environment Variables
         Given environment variable "TEST_ENVIRONMENT_VARIABLE_7" have value "1234.5678"
         When getting "TEST_ENVIRONMENT_VARIABLE_7" as float
         Then I should get evaluated value as "1234.5678"
+
+    Scenario: Getting JSON string environment variable
+        Given environment variable "TEST_ENVIRONMENT_VARIABLE_8" have value " { "name":    "John",   "age": 30, "city": "New York"}"
+        When getting "TEST_ENVIRONMENT_VARIABLE_8" as JSON
+        Then I should get JSON "{"name": "John", "age": 30, "city": "New York"}"

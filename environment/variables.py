@@ -1,6 +1,6 @@
 import os
 
-from strings.operations import trim_list, to_boolean, to_int, to_float
+from strings.operations import trim_list, to_boolean, to_int, to_float, json_to_object
 
 
 def set_environment_variable(variable_name: str, variable_value: str):
@@ -21,6 +21,10 @@ def get_int_environment_variable(variable_name: str):
 
 def get_float_environment_variable(variable_name: str):
     return to_float(get_environment_variable(variable_name))
+
+
+def get_json_environment_variable(variable_name: str):
+    return json_to_object(get_environment_variable(variable_name))
 
 
 def get_environment_variables_list(variable_name: str, parse_function=None):
