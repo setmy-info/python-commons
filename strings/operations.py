@@ -5,6 +5,11 @@ from itertools import product
 import yaml
 
 
+def split_and_trim(text: str, split_text: str = ","):
+    trimmed_list = trim_list(text.split(split_text))
+    return trimmed_list
+
+
 def trim_list(strings_list):
     fragments = [fragment.strip() for fragment in strings_list]
     return fragments
