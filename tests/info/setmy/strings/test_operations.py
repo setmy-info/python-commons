@@ -26,11 +26,17 @@ class TestFoo(unittest.TestCase):
         result = replace_named_placeholder(result, "asdf", "ghjkl")
         self.assertEqual(result, "abc asdf ghi Hello World mno qwerty")
 
-    def test_find_named_placeholders_no_default(self):
+    def test_combined_list(self):
         list1 = ["A", "B", "C"]
         list2 = ["X", "Y"]
         result = combined_list(list1, list2)
         self.assertEqual(result, ['AX', 'AY', 'BX', 'BY', 'CX', 'CY'])
+
+    def test_combined_list_with_separator(self):
+        list1 = ["A", "B", "C"]
+        list2 = ["X", "Y"]
+        result = combined_list(list1, list2, ":")
+        self.assertEqual(result, ['A:X', 'A:Y', 'B:X', 'B:Y', 'C:X', 'C:Y'])
 
 
 if __name__ == '__main__':

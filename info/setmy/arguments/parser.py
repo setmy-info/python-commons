@@ -3,19 +3,19 @@ import argparse
 from info.setmy.arguments.config import Config
 
 
-def parse_arguments(argv, config: Config):
+def parse_arguments(argv, argv_config: Config):
     """
     Parses command-line arguments based on the provided configuration.
 
     Args:
         argv (list): List of command-line arguments.
-        config (Config): Configuration object containing argument definitions.
+        argv_config (Config): Configuration object containing argument definitions.
 
     Returns:
         argparse.Namespace: Parsed command-line arguments as a namespace object.
     """
-    parser = argparse.ArgumentParser(description=config.name)
-    for argument in config.arguments:
+    parser = argparse.ArgumentParser(description=argv_config.name)
+    for argument in argv_config.arguments:
         parser.add_argument(
             ('-' + argument.short_flag),
             ('--' + argument.name),

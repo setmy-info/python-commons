@@ -25,3 +25,9 @@ python -m unittest discover -s ./tests/info/setmy -p it_*.py
 ```shell
 behave
 ```
+
+### All tests
+
+```shell
+python -m unittest discover -s ./tests/info/setmy && python -m unittest discover -s ./tests/info/setmy -p it_*.py && behave
+```

@@ -9,7 +9,7 @@ class TestFoo(unittest.TestCase):
     def test_foo(self):
         argv = ["example_application_name.py", '-i', 'input.txt', '-o', 'output.txt', '--smi-profiles',
                 'profile1,profile2']
-        config = Config(
+        argv_config = Config(
             'Example parser',
             [
                 Argument('input', 'i', str, 'Input file', True),
@@ -17,7 +17,7 @@ class TestFoo(unittest.TestCase):
                 smi_profiles_argument
             ])
 
-        parsed = parse_arguments(argv, config)
+        parsed = parse_arguments(argv, argv_config)
 
         self.assertEqual(parsed.input, 'input.txt')
         self.assertEqual(parsed.output, 'output.txt')

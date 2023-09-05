@@ -7,6 +7,11 @@ def set_environment_variable(variable_name: str, variable_value: str):
     os.environ[variable_name] = variable_value
 
 
+def delete_environment_variable(variable_name: str):
+    if variable_name in os.environ:
+        os.environ.pop(variable_name)
+
+
 def get_environment_variable(variable_name: str):
     return os.getenv(variable_name)
 
