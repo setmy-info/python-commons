@@ -26,7 +26,7 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': 'test/resources/application.yaml'}]
+                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}]
             ]
         )
 
@@ -70,9 +70,9 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': 'test/resources/application.yaml'}],
-                ['./test/resources/env/application.yaml', {'name': 'test/resources/env/application.yaml'}],
-                ['./test/resources/cli/application.yaml', {'name': 'test/resources/cli/application.yaml'}]
+                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}],
+                ['./test/resources/env/application.yaml', {'name': './test/resources/env/application.yaml'}],
+                ['./test/resources/cli/application.yaml', {'name': './test/resources/cli/application.yaml'}]
             ]
         )
 
@@ -107,8 +107,8 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': 'test/resources/application.yaml'}],
-                ['./test/resources/env/application.yaml', {'name': 'test/resources/env/application.yaml'}]
+                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}],
+                ['./test/resources/env/application.yaml', {'name': './test/resources/env/application.yaml'}]
             ]
         )
 

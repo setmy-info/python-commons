@@ -69,11 +69,9 @@ class Application:
     def parse_file_by_type(file_name: str):
         new_file_name = file_name.lower()
         if re.search(r'\.(yaml|yml)$', new_file_name):
-            result = parse_yaml_file(file_name)
-            return result
+            return parse_yaml_file(file_name)
         elif re.search(r'\.json$', new_file_name):
-            result = parse_json_file(file_name)
-            return result
+            return parse_json_file(file_name)
         else:
             return None
 

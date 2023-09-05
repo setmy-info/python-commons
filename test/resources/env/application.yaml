@@ -1,1 +1,1 @@
-name: "test/resources/env/application.yaml"
+name: "./test/resources/env/application.yaml"
