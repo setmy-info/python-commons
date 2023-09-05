@@ -23,17 +23,17 @@ class Application:
             Application.application_file_suffixes,
             "."
         )
-        self.application_profiles_file_prefixes = combined_list(
+        application_profiles_file_prefixes = combined_list(
             [Application.application_file_prefix],
             self.profiles_list,
             "-"
         )
-        self.application_profiles_files = combined_list(
-            self.application_profiles_file_prefixes,
+        application_profiles_files = combined_list(
+            application_profiles_file_prefixes,
             Application.application_file_suffixes,
             "."
         )
-        self.application_files = self.application_profiles_files + self.default_application_files
+        self.application_files = application_profiles_files + self.default_application_files
 
 
 def find_last_not_none(*args):

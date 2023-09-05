@@ -19,8 +19,6 @@ class TestFoo(unittest.TestCase):
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, [])
         self.assertEqual(app.default_application_files, ['application.json', 'application.yml', 'application.yaml'])
-        self.assertEqual(app.application_profiles_file_prefixes, [])
-        self.assertEqual(app.application_profiles_files, [])
         self.assertEqual(app.application_files, ['application.json', 'application.yml', 'application.yaml'])
 
     def test_init_cli_profiles(self):
@@ -34,18 +32,6 @@ class TestFoo(unittest.TestCase):
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, ['profile1', 'profile2'])
         self.assertEqual(app.default_application_files, ['application.json', 'application.yml', 'application.yaml'])
-        self.assertEqual(app.application_profiles_file_prefixes, ['application-profile1', 'application-profile2'])
-        self.assertEqual(
-            app.application_profiles_files,
-            [
-                'application-profile1.json',
-                'application-profile1.yml',
-                'application-profile1.yaml',
-                'application-profile2.json',
-                'application-profile2.yml',
-                'application-profile2.yaml'
-            ]
-        )
         self.assertEqual(
             app.application_files,
             [
@@ -72,18 +58,6 @@ class TestFoo(unittest.TestCase):
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, ['profileX', 'profileY'])
         self.assertEqual(app.default_application_files, ['application.json', 'application.yml', 'application.yaml'])
-        self.assertEqual(app.application_profiles_file_prefixes, ['application-profileX', 'application-profileY'])
-        self.assertEqual(
-            app.application_profiles_files,
-            [
-                'application-profileX.json',
-                'application-profileX.yml',
-                'application-profileX.yaml',
-                'application-profileY.json',
-                'application-profileY.yml',
-                'application-profileY.yaml'
-            ]
-        )
         self.assertEqual(
             app.application_files,
             [
