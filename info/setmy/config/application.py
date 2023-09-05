@@ -1,6 +1,7 @@
 import os
 import re
 from collections import OrderedDict
+from functools import reduce
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
@@ -59,6 +60,16 @@ class Application:
                 )
             )
         )
+        self.merged_config = reduce(
+            lambda x, y: merge_dicts(x, y),
+            list(
+                map(
+                    lambda sub_list: sub_list[1],
+                    self.applications_files_paths
+                )
+            ),
+            {}  # initial value
+        )
 
     def get_cli_config_paths(self):
         if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:
@@ -82,3 +93,23 @@ def find_last_not_none_and_empty(*args):
         if arg is not None and isinstance(arg, list) and arg:
             last_not_none = arg
     return last_not_none
+
+
+def merge_dicts(dict1, dict2):
+    """
+    Merge two dictionaries hierarchically.
+
+    Args:
+        dict1 (dict): First dictionary.
+        dict2 (dict): Second dictionary.
+
+    Returns:
+        dict: Merged dictionary.
+    """
+    result = dict1.copy()
+    for key, value in dict2.items():
+        if isinstance(value, dict) and key in result and isinstance(result[key], dict):
+            result[key] = merge_dicts(result[key], value)
+        else:
+            result[key] = value
+    return result

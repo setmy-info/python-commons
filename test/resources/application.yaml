@@ -1,1 +1,4 @@
 name: "./test/resources/application.yaml"
+a:
+    b:
+        c: application.yaml

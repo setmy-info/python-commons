@@ -26,9 +26,12 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}]
+                ['./test/resources/application.yaml', {'a': {'b': {'c': 'application.yaml'}},
+                                                       'name': './test/resources/application.yaml'}]
             ]
         )
+        self.assertEqual(app.merged_config, {'a': {'b': {'c': 'application.yaml'}},
+                                             'name': './test/resources/application.yaml'})
 
     def test_init_cli_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
@@ -70,11 +73,18 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}],
-                ['./test/resources/env/application.yaml', {'name': './test/resources/env/application.yaml'}],
-                ['./test/resources/cli/application.yaml', {'name': './test/resources/cli/application.yaml'}]
+                ['./test/resources/application.yaml', {'a': {'b': {'c': 'application.yaml'}},
+                                                       'name': './test/resources/application.yaml'}],
+                ['./test/resources/env/application.yaml', {'d': {'e': {'f': 'env/application.yaml'}},
+                                                           'name': './test/resources/env/application.yaml'}],
+                ['./test/resources/cli/application.yaml', {'g': {'h': {'i': 'cli/application.yaml'}},
+                                                           'name': './test/resources/cli/application.yaml'}]
             ]
         )
+        self.assertEqual(app.merged_config, {'a': {'b': {'c': 'application.yaml'}},
+                                             'd': {'e': {'f': 'env/application.yaml'}},
+                                             'g': {'h': {'i': 'cli/application.yaml'}},
+                                             'name': './test/resources/cli/application.yaml'})
 
     def test_init_environment_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
@@ -107,10 +117,15 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.applications_files_paths,
             [
-                ['./test/resources/application.yaml', {'name': './test/resources/application.yaml'}],
-                ['./test/resources/env/application.yaml', {'name': './test/resources/env/application.yaml'}]
+                ['./test/resources/application.yaml', {'a': {'b': {'c': 'application.yaml'}},
+                                                       'name': './test/resources/application.yaml'}],
+                ['./test/resources/env/application.yaml', {'d': {'e': {'f': 'env/application.yaml'}},
+                                                           'name': './test/resources/env/application.yaml'}]
             ]
         )
+        self.assertEqual(app.merged_config, {'a': {'b': {'c': 'application.yaml'}},
+                                             'd': {'e': {'f': 'env/application.yaml'}},
+                                             'name': './test/resources/env/application.yaml'})
 
     def test_find_last_not_none(self):
         result = find_last_not_none_and_empty(None, ["1", "2"], None, ["3", "4"])
