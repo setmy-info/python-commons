@@ -2,7 +2,7 @@ import json
 import re
 from itertools import product
 
-import yaml
+from info.setmy import yaml
 
 
 def split_and_trim(text: str, split_text: str = ","):

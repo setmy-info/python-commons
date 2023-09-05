@@ -1,13 +1,6 @@
 from behave import *
 
-from environment.variables import get_environment_variable
-from environment.variables import get_environment_variables_list, \
-    get_boolean_environment_variable, get_int_environment_variable, get_float_environment_variable, \
-    get_json_environment_variable
-from behave import *
-
-from environment.variables import get_environment_variable
-from environment.variables import get_environment_variables_list, \
+from info.setmy.environment.variables import get_environment_variable, get_environment_variables_list, \
     get_boolean_environment_variable, get_int_environment_variable, get_float_environment_variable, \
     get_json_environment_variable
 

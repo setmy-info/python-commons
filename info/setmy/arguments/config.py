@@ -1,4 +1,4 @@
-from arguments.argument import Argument
+from info.setmy.arguments.argument import Argument
 
 
 class Config:

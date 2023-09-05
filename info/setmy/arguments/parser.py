@@ -1,6 +1,6 @@
 import argparse
 
-from arguments.config import Config
+from info.setmy.arguments.config import Config
 
 
 def parse_arguments(argv, config: Config):

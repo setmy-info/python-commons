@@ -1,8 +1,8 @@
 import unittest
 
-from arguments.argument import Argument, smi_profiles_argument
-from arguments.config import Config
-from arguments.parser import parse_arguments
+from info.setmy.arguments.argument import Argument, smi_profiles_argument
+from info.setmy.arguments.config import Config
+from info.setmy.arguments.parser import parse_arguments
 
 
 class TestFoo(unittest.TestCase):

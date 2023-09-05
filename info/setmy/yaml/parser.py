@@ -1,4 +1,4 @@
-import yaml
+from info.setmy import yaml
 
 
 def parse_yaml_file(file_name: str):
