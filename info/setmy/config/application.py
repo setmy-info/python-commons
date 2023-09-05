@@ -14,7 +14,6 @@ class Application:
         self.arguments = parse_arguments(self.argv, self.argv_config)
         # get profiles in order and overload by that order: code, env, cli
         self.profiles_list = find_last_not_none(
-            # [""],  # default profile
             get_environment_variables_list("SMI_PROFILES"),
             self.arguments.smi_profiles
         )
