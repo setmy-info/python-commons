@@ -97,3 +97,27 @@ def combined_list(list1: [str], list2: [str], join_text: str = ''):
         list: A new list where elements from the two input lists are multiplied and joined with the join_text separator.
     """
     return [join_text.join(items) for items in product(list1, list2)]
+
+
+def combined_by_function_list(list1: [str], list2: [str], join_text: str = '', func=None):
+    """
+       Combines two lists of strings into a new list using a join_text separator
+       and optionally filters the resulting elements based on a given function.
+
+       Args:
+           list1 (list): The first list of strings.
+           list2 (list): The second list of strings.
+           join_text (str, optional): The separator text used to join elements from list1 and list2. Default is an empty string.
+           func (function, optional): A filtering function that takes a combined string as input and returns True or False.
+               If provided, only elements for which func returns True will be included in the result. Default is None.
+
+       Returns:
+           list: A list of combined and optionally filtered strings.
+       """
+    result = []
+    for item1 in list1:
+        for item2 in list2:
+            sum_item = item1 + join_text + item2
+            if func is not None and func(sum_item):
+                result.append(sum_item)
+    return result

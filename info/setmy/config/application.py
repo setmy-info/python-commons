@@ -1,7 +1,10 @@
+import os
+from collections import OrderedDict
+
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
 from info.setmy.environment.variables import get_environment_variables_list
-from info.setmy.strings.operations import combined_list
+from info.setmy.strings.operations import combined_list, combined_by_function_list
 
 
 class Application:
@@ -12,8 +15,17 @@ class Application:
         self.argv = argv
         self.argv_config = argv_config
         self.arguments = parse_arguments(self.argv, self.argv_config)
+        # get resource/config folders in order and loading (overload in case of existing file) by that
+        # order: code, env, cli
+        self.config_paths = list(
+            OrderedDict.fromkeys(
+                ["./test/resources", "./resources"] +
+                get_environment_variables_list("SMI_CONFIG_PATHS") +
+                self.get_cli_config_paths()
+            )
+        )
         # get profiles in order and overload by that order: (code, ) env, cli
-        self.profiles_list = find_last_not_none(
+        self.profiles_list = find_last_not_none_and_empty(
             get_environment_variables_list("SMI_PROFILES"),
             self.arguments.smi_profiles
         )
@@ -34,8 +46,23 @@ class Application:
         )
         self.application_files = application_profiles_files + self.default_application_files
 
+        def check_function(file_path):
+            return os.path.isfile(file_path)
 
-def find_last_not_none(*args):
+        self.applications_files_paths = combined_by_function_list(
+            self.config_paths,
+            self.application_files,
+            "/",
+            check_function
+        )
+
+    def get_cli_config_paths(self):
+        if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:
+            return self.arguments.smi_config_paths
+        return []
+
+
+def find_last_not_none_and_empty(*args):
     last_not_none = []
     for arg in args:
         if arg is not None and isinstance(arg, list) and arg:

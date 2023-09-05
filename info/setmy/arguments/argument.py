@@ -12,3 +12,4 @@ class Argument:
 
 
 smi_profiles_argument = Argument('smi-profiles', 'p', split_and_trim, 'Comma separated profiles string.', False)
+smi_config_paths = Argument('smi-config-paths', 'c', split_and_trim, 'Comma separated config paths.', False)
