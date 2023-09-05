@@ -1,10 +1,13 @@
 import os
+import re
 from collections import OrderedDict
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
 from info.setmy.environment.variables import get_environment_variables_list
+from info.setmy.json.parser import parse_json_file
 from info.setmy.strings.operations import combined_list, combined_by_function_list
+from info.setmy.yaml.parser import parse_yaml_file
 
 
 class Application:
@@ -45,21 +48,34 @@ class Application:
             "."
         )
         self.application_files = application_profiles_files + self.default_application_files
-
-        def check_function(file_path):
-            return os.path.isfile(file_path)
-
-        self.applications_files_paths = combined_by_function_list(
-            self.config_paths,
-            self.application_files,
-            "/",
-            check_function
+        self.applications_files_paths = list(
+            map(
+                lambda item: [item, self.parse_file_by_type(item)],
+                combined_by_function_list(
+                    self.config_paths,
+                    self.application_files,
+                    "/",
+                    lambda file_path: os.path.isfile(file_path)
+                )
+            )
         )
 
     def get_cli_config_paths(self):
         if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:
             return self.arguments.smi_config_paths
         return []
+
+    @staticmethod
+    def parse_file_by_type(file_name: str):
+        new_file_name = file_name.lower()
+        if re.search(r'\.(yaml|yml)$', new_file_name):
+            result = parse_yaml_file(file_name)
+            return result
+        elif re.search(r'\.json$', new_file_name):
+            result = parse_json_file(file_name)
+            return result
+        else:
+            return None
 
 
 def find_last_not_none_and_empty(*args):
