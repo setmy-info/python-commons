@@ -63,17 +63,14 @@ def yaml_to_object(text: str, default_value={}):
         return None
 
 
-# TODO : test it
-def find_named_placeholders(text: str, to_clean: bool = True):
+def find_named_placeholders(text: str, as_clean: bool = True):
     pattern = r"\${(.*?)}"
     placeholders = re.findall(pattern, text)
-    if to_clean is True:
-        cleaned_placeholders = [placeholder.replace("${", "").replace("}", "") for placeholder in placeholders]
-        return cleaned_placeholders
+    if as_clean is False:
+        return ["${" + placeholder + "}" for placeholder in placeholders]
     return placeholders
 
 
-# TODO : test it
 def replace_named_placeholder(text: str, place_holder_name: str, replacement: str):
     if replacement is None:
         replacement_string = ""
@@ -83,13 +80,13 @@ def replace_named_placeholder(text: str, place_holder_name: str, replacement: st
     return text.replace(placeholder, replacement_string)
 
 
-# TODO : test it
-# list1 = ["A", "B", "C"]
-# list2 = ["X", "Y"]
-# result should be: ['AX', 'AY', 'BX', 'BY', 'CX', 'CY']
 def combined_list(list1: [str], list2: [str], join_text: str = ''):
     """
     Creates a new list by multiplying elements from two input lists, and joining them with the specified join_text separator.
+    list1 = ["A", "B", "C"]
+    list2 = ["X", "Y"]
+    result = combined_list(list1, list2)
+    self.assertEqual(result, ['AX', 'AY', 'BX', 'BY', 'CX', 'CY'])
 
     Args:
         list1 (list): The first input list.
