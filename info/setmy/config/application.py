@@ -6,13 +6,13 @@ from info.setmy.strings.operations import combined_list
 
 class Application:
     application_file_prefix = "application"
-    application_file_suffixes = ["json", "yml", "yaml"]
+    application_file_suffixes = ["json", "yml", "yaml"]  # In overloading order
 
     def __init__(self, argv: [str], argv_config: Config):
         self.argv = argv
         self.argv_config = argv_config
         self.arguments = parse_arguments(self.argv, self.argv_config)
-        # get profiles in order and overload by that order: code, env, cli
+        # get profiles in order and overload by that order: (code, ) env, cli
         self.profiles_list = find_last_not_none(
             get_environment_variables_list("SMI_PROFILES"),
             self.arguments.smi_profiles
