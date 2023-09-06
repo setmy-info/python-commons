@@ -35,3 +35,10 @@ python -m unittest discover -s ./test/info/setmy && python -m unittest discover 
 ### PyCharm
 
 Running tests have a problem: working directory have to be set for tests
+
+## Deploy
+
+```shell
+python setup.py sdist bdist_wheel
+twine upload dist/*
+```
