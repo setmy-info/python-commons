@@ -33,7 +33,7 @@ def to_int(text: str, default_value=0):
     try:
         return int(text)
     except (ValueError, TypeError):
-        return None
+        return default_value
 
 
 def to_float(text: str, default_value=0.0):
@@ -51,7 +51,7 @@ def json_to_object(text: str, default_value={}):
     try:
         return json.loads(text)
     except (json.JSONDecodeError, TypeError):
-        return None
+        return default_value
 
 
 def yaml_to_object(text: str, default_value={}):
@@ -60,7 +60,7 @@ def yaml_to_object(text: str, default_value={}):
     try:
         return yaml.safe_load(text)
     except (yaml.YAMLError):
-        return None
+        return default_value
 
 
 def find_named_placeholders(text: str, as_clean: bool = True):
