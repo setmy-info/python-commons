@@ -5,8 +5,17 @@
 ### Preparations
 
 ```shell
+py -3.9 -m venv ./.venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
+
+### PyCharm
+
+"File" -> "Settings" -> Python Integrated Tools -> Default test runner: Unittest
+
+Running tests have a problem: working directory have to be set for tests
 
 ### Run unit tests
 
@@ -31,10 +40,6 @@ behave
 ```shell
 python -m unittest discover -s ./test/info/setmy && python -m unittest discover -s ./test/info/setmy -p it_*.py && behave
 ```
-
-### PyCharm
-
-Running tests have a problem: working directory have to be set for tests
 
 ## Deploy
 
