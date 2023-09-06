@@ -1,4 +1,4 @@
-from info.setmy.strings.operations import split_and_trim
+from info.setmy.string.operations import split_and_trim
 
 
 class Argument:

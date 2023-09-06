@@ -5,9 +5,10 @@ from functools import reduce
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
-from info.setmy.environment.variables import get_environment_variables_list
+from info.setmy.environment.variables import get_environment_variables_list, get_environment_variable
 from info.setmy.json.parser import parse_json_file
-from info.setmy.strings.operations import combined_list, combined_by_function_list
+from info.setmy.string.operations import combined_list, combined_by_function_list, find_named_placeholders, \
+    replace_named_placeholder
 from info.setmy.yaml.parser import parse_yaml_file
 
 
@@ -80,11 +81,27 @@ class Application:
     def parse_file_by_type(file_name: str):
         new_file_name = file_name.lower()
         if re.search(r'\.(yaml|yml)$', new_file_name):
-            return parse_yaml_file(file_name)
+            return parse_yaml_file(file_name, {'post_read_function': post_read_function})
         elif re.search(r'\.json$', new_file_name):
-            return parse_json_file(file_name)
+            return parse_json_file(file_name, {'post_read_function': post_read_function})
         else:
             return None
+
+
+def post_read_function(text: str):
+    placeholders = find_named_placeholders(text)
+    placeholder_value_pairs = list(
+        map(
+            lambda place_holder: [place_holder, get_environment_variable(place_holder)],
+            placeholders
+        )
+    )
+    for placeholder_value_pair in placeholder_value_pairs:
+        placeholder = placeholder_value_pair[0]
+        value = placeholder_value_pair[1]
+        if value is not None:
+            text = replace_named_placeholder(text, placeholder, value)
+    return text
 
 
 def find_last_not_none_and_empty(*args):

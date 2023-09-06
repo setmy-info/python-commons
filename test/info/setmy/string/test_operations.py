@@ -1,6 +1,6 @@
 import unittest
 
-from info.setmy.strings.operations import find_named_placeholders, replace_named_placeholder, combined_list
+from info.setmy.string.operations import find_named_placeholders, replace_named_placeholder, combined_list
 
 
 class TestFoo(unittest.TestCase):

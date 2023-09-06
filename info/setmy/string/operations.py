@@ -101,18 +101,18 @@ def combined_list(list1: [str], list2: [str], join_text: str = ''):
 
 def combined_by_function_list(list1: [str], list2: [str], join_text: str = '', func=None):
     """
-       Combines two lists of strings into a new list using a join_text separator
+       Combines two lists of string into a new list using a join_text separator
        and optionally filters the resulting elements based on a given function.
 
        Args:
-           list1 (list): The first list of strings.
-           list2 (list): The second list of strings.
+           list1 (list): The first list of string.
+           list2 (list): The second list of string.
            join_text (str, optional): The separator text used to join elements from list1 and list2. Default is an empty string.
            func (function, optional): A filtering function that takes a combined string as input and returns True or False.
                If provided, only elements for which func returns True will be included in the result. Default is None.
 
        Returns:
-           list: A list of combined and optionally filtered strings.
+           list: A list of combined and optionally filtered string.
        """
     result = []
     for item1 in list1:
@@ -121,3 +121,9 @@ def combined_by_function_list(list1: [str], list2: [str], join_text: str = '', f
             if func is not None and func(sum_item):
                 result.append(sum_item)
     return result
+
+
+def none_to_default(text: str, default_text: str = ""):
+    if text is None:
+        return default_text
+    return text
