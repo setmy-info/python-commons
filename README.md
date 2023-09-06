@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 "File" -> "Settings" -> Python Integrated Tools -> Default test runner: Unittest
 
-Running tests have a problem: working directory have to be set for tests
+Running tests have a problem: working directory have to be set for tests.
 
 ### Run unit tests
 
