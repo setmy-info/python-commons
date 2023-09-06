@@ -22,6 +22,7 @@ class Application:
         self.arguments = parse_arguments(self.argv, self.argv_config)
         # get resource/config folders in order and loading (overload in case of existing file) by that
         # order: code, env, cli
+        # Lists orders represent overload order
         self.config_paths = list(
             OrderedDict.fromkeys(
                 ["./test/resources", "./resources"] +
