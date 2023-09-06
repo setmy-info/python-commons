@@ -11,6 +11,10 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
+For developing depending project/module, dependency can be added into **requirements.txt** as:
+
+    python-commons @ file:///C:/sources/setmy.info/submodules/python-commons
+
 ### PyCharm
 
 "File" -> "Settings" -> Python Integrated Tools -> Default test runner: Unittest
