@@ -6,7 +6,8 @@ from info.setmy.arguments.parser import parse_arguments
 
 
 class TestFoo(unittest.TestCase):
-    def test_foo(self):
+
+    def test_parse_arguments(self):
         argv = ["example_application_name.py", '-i', 'input.txt', '-o', 'output.txt', '--smi-profiles',
                 'profile1,profile2']
         argv_config = Config(
