@@ -66,6 +66,7 @@ def yaml_to_object(text: str, default_value={}):
 def find_named_placeholders(text: str, as_clean: bool = True):
     pattern = r"\${(.*?)}"
     placeholders = re.findall(pattern, text)
+    # TODO : find only unique placeholders
     if as_clean is False:
         return ["${" + placeholder + "}" for placeholder in placeholders]
     return placeholders
