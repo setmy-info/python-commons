@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='python_commons',
+    name='smi_python_commons',
     version='0.1.0',
     description='setmy.info python commons library.',
     long_description='setmy.info python commons library.',
