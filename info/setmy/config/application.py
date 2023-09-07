@@ -24,11 +24,9 @@ class Application:
         # order: code, env, cli
         # Lists orders represent overload order
         self.config_paths = list(
-            OrderedDict.fromkeys(
-                ["./test/resources", "./resources"] +
-                get_environment_variables_list("SMI_CONFIG_PATHS") +
-                self.get_cli_config_paths()
-            )
+            ["./test/resources", "./resources"] +
+            get_environment_variables_list("SMI_CONFIG_PATHS") +
+            self.get_cli_config_paths()
         )
         # get profiles in order and overload by that order: (code, ) env, cli
         self.profiles_list = find_last_not_none_and_empty(
