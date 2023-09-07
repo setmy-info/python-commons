@@ -1,6 +1,5 @@
 import os
 import re
-from collections import OrderedDict
 from functools import reduce
 
 from info.setmy.arguments.config import Config
@@ -48,7 +47,7 @@ class Application:
             Application.application_file_suffixes,
             "."
         )
-        self.application_files = application_profiles_files + self.default_application_files
+        self.application_files = self.default_application_files + application_profiles_files
         self.applications_files_paths = list(
             map(
                 lambda item: [item, self.parse_file_by_type(item)],

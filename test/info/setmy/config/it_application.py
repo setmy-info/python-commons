@@ -86,15 +86,15 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.application_files,
             [
+                'application.json',
+                'application.yml',
+                'application.yaml',
                 'application-profile1.json',
                 'application-profile1.yml',
                 'application-profile1.yaml',
                 'application-profile2.json',
                 'application-profile2.yml',
-                'application-profile2.yaml',
-                'application.json',
-                'application.yml',
-                'application.yaml'
+                'application-profile2.yaml'
             ]
         )
         self.assertEqual(
@@ -172,15 +172,15 @@ class TestFoo(unittest.TestCase):
         self.assertEqual(
             app.application_files,
             [
+                'application.json',
+                'application.yml',
+                'application.yaml',
                 'application-profileX.json',
                 'application-profileX.yml',
                 'application-profileX.yaml',
                 'application-profileY.json',
                 'application-profileY.yml',
-                'application-profileY.yaml',
-                'application.json',
-                'application.yml',
-                'application.yaml'
+                'application-profileY.yaml'
             ]
         )
         self.assertEqual(app.config_paths, ['./test/resources', './resources', './test/resources/env'])
