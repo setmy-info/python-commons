@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='smi_python_commons',
-    version='0.1.1-SNAPSHOT',
+    version='0.1.1',
     description='setmy.info python commons library.',
     long_description='setmy.info python commons library.',
     author='Imre Tabur',
