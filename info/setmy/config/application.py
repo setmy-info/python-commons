@@ -4,6 +4,8 @@ from functools import reduce
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
+from info.setmy.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, OPTIONAL_CONFIG_FILE, \
+    APPLICATION_FILE_PREFIXES
 from info.setmy.environment.variables import get_environment_variables_list, get_environment_variable
 from info.setmy.json.parser import parse_json_file
 from info.setmy.string.operations import combined_list, combined_by_function_list, find_named_placeholders, \
@@ -12,8 +14,6 @@ from info.setmy.yaml.parser import parse_yaml_file
 
 
 class Application:
-    application_file_prefix = "application"
-    application_file_suffixes = ["json", "yml", "yaml"]  # In overloading order
 
     def __init__(self, argv: [str], argv_config: Config):
         self.argv = argv
@@ -24,30 +24,32 @@ class Application:
         # Lists orders represent overload order
         self.config_paths = list(
             ["./test/resources", "./resources"] +
-            get_environment_variables_list("SMI_CONFIG_PATHS") +
+            get_environment_variables_list(SMI_CONFIG_PATHS) +
             self.get_cli_config_paths()
         )
         # get profiles in order and overload by that order: (code, ) env, cli
         self.profiles_list = find_last_not_none_and_empty(
-            get_environment_variables_list("SMI_PROFILES"),
+            get_environment_variables_list(SMI_PROFILES),
             self.arguments.smi_profiles
         )
         self.default_application_files = combined_list(
-            [Application.application_file_prefix],
-            Application.application_file_suffixes,
+            APPLICATION_FILE_PREFIXES,
+            APPLICATION_FILE_SUFFIXES,
             "."
         )
         application_profiles_file_prefixes = combined_list(
-            [Application.application_file_prefix],
+            APPLICATION_FILE_PREFIXES,
             self.profiles_list,
             "-"
         )
         application_profiles_files = combined_list(
             application_profiles_file_prefixes,
-            Application.application_file_suffixes,
+            APPLICATION_FILE_SUFFIXES,
             "."
         )
         self.application_files = self.default_application_files + application_profiles_files
+        optional_env_application_files = get_environment_variables_list(OPTIONAL_CONFIG_FILE)
+        optional_cli_application_files = self.get_cli_optional_config_file_path()
         self.applications_files_paths = list(
             map(
                 lambda item: [item, self.parse_file_by_type(item)],
@@ -56,7 +58,9 @@ class Application:
                     self.application_files,
                     "/",
                     lambda file_path: os.path.isfile(file_path)
-                )
+                ) +
+                optional_env_application_files +
+                optional_cli_application_files
             )
         )
         self.merged_config = reduce(
@@ -73,6 +77,11 @@ class Application:
     def get_cli_config_paths(self):
         if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:
             return self.arguments.smi_config_paths
+        return []
+
+    def get_cli_optional_config_file_path(self):
+        if hasattr(self.arguments, "smi_optional_config_file") and self.arguments.smi_optional_config_file is not None:
+            return self.arguments.smi_optional_config_file
         return []
 
     @staticmethod

@@ -1,7 +1,8 @@
 import unittest
 
-from info.setmy.arguments.argument import Argument, smi_profiles_argument
+from info.setmy.arguments.argument import Argument
 from info.setmy.arguments.config import Config
+from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT
 from info.setmy.arguments.parser import parse_arguments
 
 
@@ -15,7 +16,7 @@ class TestFoo(unittest.TestCase):
             [
                 Argument('input', 'i', str, 'Input file', True),
                 Argument('output', 'o', str, 'Output file', True),
-                smi_profiles_argument
+                SMI_PROFILES_ARGUMENT
             ])
 
         parsed = parse_arguments(argv, argv_config)

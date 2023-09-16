@@ -1,7 +1,8 @@
 import unittest
 
-from info.setmy.arguments.argument import smi_profiles_argument, smi_config_paths
 from info.setmy.arguments.config import Config
+from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT, SMI_CONFIG_PATHS_ARGUMENT, \
+    SMI_OPTIONAL_CONFIG_FILE_PATH_ARGUMENT
 from info.setmy.config.application import Application, find_last_not_none_and_empty
 from info.setmy.environment.variables import set_environment_variable, delete_environment_variable
 
@@ -11,6 +12,7 @@ class TestFoo(unittest.TestCase):
     def setUp(self):
         delete_environment_variable("SMI_PROFILES")
         delete_environment_variable("SMI_CONFIG_PATHS")
+        delete_environment_variable("SMI_OPTIONAL_CONFIG_FILE")
         set_environment_variable("SOME_NUMBER_VALUE_A", "123")
         set_environment_variable("SOME_NUMBER_VALUE_B", "123.456")
         set_environment_variable("SOME_BOOLEAN_VALUE_A", "true")
@@ -23,8 +25,8 @@ class TestFoo(unittest.TestCase):
         argv_config = Config(
             'Example parser',
             [
-                smi_profiles_argument,
-                smi_config_paths
+                SMI_PROFILES_ARGUMENT,
+                SMI_CONFIG_PATHS_ARGUMENT
             ])
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, [])
@@ -72,13 +74,15 @@ class TestFoo(unittest.TestCase):
     def test_init_cli_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
         set_environment_variable("SMI_CONFIG_PATHS", "./test/resources/env")
+        set_environment_variable("SMI_OPTIONAL_CONFIG_FILE", "./test/resources/env/optional.yaml")
         argv = ["example_application_name.py", '--smi-profiles', 'profile1,profile2', '--smi-config-paths',
-                './test/resources/cli']
+                './test/resources/cli', '--smi-optional-config-file', './test/resources/cli/optional.yaml']
         argv_config = Config(
             'Example parser',
             [
-                smi_profiles_argument,
-                smi_config_paths
+                SMI_PROFILES_ARGUMENT,
+                SMI_CONFIG_PATHS_ARGUMENT,
+                SMI_OPTIONAL_CONFIG_FILE_PATH_ARGUMENT
             ])
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, ['profile1', 'profile2'])
@@ -130,7 +134,11 @@ class TestFoo(unittest.TestCase):
                'name': './test/resources/env/application.yaml'}],
              ['./test/resources/cli/application.yaml',
               {'g': {'h': {'i': 'cli/application.yaml'}},
-               'name': './test/resources/cli/application.yaml'}]]
+               'name': './test/resources/cli/application.yaml'}],
+             ['./test/resources/env/optional.yaml',
+              {'a': {'k': {'l': 'Some optional value from environment optional yaml'}}}],
+             ['./test/resources/cli/optional.yaml',
+              {'a': {'k': {'l': 'Some optional value from CLI optional yaml'}}}]]
         )
         self.assertEqual(app.merged_config,
                          {'a':
@@ -149,7 +157,8 @@ class TestFoo(unittest.TestCase):
                                'g': False,
                                'h': 'A AA AAA',
                                'i': 'B BB BBB',
-                               'j': '${NON_EXISTING_VALUE}'},
+                               'j': '${NON_EXISTING_VALUE}',
+                               'k': {'l': 'Some optional value from CLI optional yaml'}},
                           'd': {'e': {'f': 'env/application.yaml'}},
                           'g': {'h': {'i': 'cli/application.yaml'}},
                           'name': './test/resources/cli/application.yaml'
@@ -159,12 +168,13 @@ class TestFoo(unittest.TestCase):
     def test_init_environment_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
         set_environment_variable("SMI_CONFIG_PATHS", "./test/resources/env")
+        set_environment_variable("SMI_OPTIONAL_CONFIG_FILE", "./test/resources/env/optional.yaml")
         argv = ["example_application_name.py"]
         argv_config = Config(
             'Example parser',
             [
-                smi_profiles_argument,
-                smi_config_paths
+                SMI_PROFILES_ARGUMENT,
+                SMI_CONFIG_PATHS_ARGUMENT
             ])
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, ['profileX', 'profileY'])
@@ -205,7 +215,10 @@ class TestFoo(unittest.TestCase):
                'name': './test/resources/application.yaml'}],
              ['./test/resources/env/application.yaml',
               {'d': {'e': {'f': 'env/application.yaml'}},
-               'name': './test/resources/env/application.yaml'}]]
+               'name': './test/resources/env/application.yaml'}],
+             ['./test/resources/env/optional.yaml', {
+                 'a': {'k': {'l': 'Some optional value from environment optional yaml'}}}]
+             ]
         )
         self.assertEqual(
             app.merged_config,
@@ -226,7 +239,8 @@ class TestFoo(unittest.TestCase):
                   'g': False,
                   'h': 'A AA AAA',
                   'i': 'B BB BBB',
-                  'j': '${NON_EXISTING_VALUE}'
+                  'j': '${NON_EXISTING_VALUE}',
+                  'k': {'l': 'Some optional value from environment optional yaml'},
                   },
              'd':
                  {'e':
