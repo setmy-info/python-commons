@@ -4,7 +4,8 @@ from functools import reduce
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.parser import parse_arguments
-from info.setmy.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, OPTIONAL_CONFIG_FILE, \
+from info.setmy.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, \
+    SMI_OPTIONAL_CONFIG_FILES, \
     APPLICATION_FILE_PREFIXES
 from info.setmy.environment.variables import get_environment_variables_list, get_environment_variable
 from info.setmy.json.parser import parse_json_file
@@ -48,7 +49,7 @@ class Application:
             "."
         )
         self.application_files = self.default_application_files + application_profiles_files
-        optional_env_application_files = get_environment_variables_list(OPTIONAL_CONFIG_FILE)
+        optional_env_application_files = get_environment_variables_list(SMI_OPTIONAL_CONFIG_FILES)
         optional_cli_application_files = self.get_cli_optional_config_file_path()
         self.applications_files_paths = list(
             map(
@@ -80,8 +81,9 @@ class Application:
         return []
 
     def get_cli_optional_config_file_path(self):
-        if hasattr(self.arguments, "smi_optional_config_file") and self.arguments.smi_optional_config_file is not None:
-            return self.arguments.smi_optional_config_file
+        if hasattr(self.arguments,
+                   "smi_optional_config_files") and self.arguments.smi_optional_config_files is not None:
+            return self.arguments.smi_optional_config_files
         return []
 
     @staticmethod

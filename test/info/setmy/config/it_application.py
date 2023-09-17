@@ -2,17 +2,17 @@ import unittest
 
 from info.setmy.arguments.config import Config
 from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT, SMI_CONFIG_PATHS_ARGUMENT, \
-    SMI_OPTIONAL_CONFIG_FILE_PATH_ARGUMENT
+    SMI_OPTIONAL_CONFIG_FILES_ARGUMENT
 from info.setmy.config.application import Application, find_last_not_none_and_empty
 from info.setmy.environment.variables import set_environment_variable, delete_environment_variable
 
 
-class TestFoo(unittest.TestCase):
+class IntegrationTestApplication(unittest.TestCase):
 
     def setUp(self):
         delete_environment_variable("SMI_PROFILES")
         delete_environment_variable("SMI_CONFIG_PATHS")
-        delete_environment_variable("SMI_OPTIONAL_CONFIG_FILE")
+        delete_environment_variable("SMI_OPTIONAL_CONFIG_FILES")
         set_environment_variable("SOME_NUMBER_VALUE_A", "123")
         set_environment_variable("SOME_NUMBER_VALUE_B", "123.456")
         set_environment_variable("SOME_BOOLEAN_VALUE_A", "true")
@@ -74,15 +74,18 @@ class TestFoo(unittest.TestCase):
     def test_init_cli_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
         set_environment_variable("SMI_CONFIG_PATHS", "./test/resources/env")
-        set_environment_variable("SMI_OPTIONAL_CONFIG_FILE", "./test/resources/env/optional.yaml")
-        argv = ["example_application_name.py", '--smi-profiles', 'profile1,profile2', '--smi-config-paths',
-                './test/resources/cli', '--smi-optional-config-file', './test/resources/cli/optional.yaml']
+        set_environment_variable("SMI_OPTIONAL_CONFIG_FILES", "./test/resources/env/optional.yaml")
+        argv = [
+            "example_application_name.py",
+            '--smi-profiles', 'profile1,profile2',
+            '--smi-config-paths', './test/resources/cli',
+            '--smi-optional-config-files', './test/resources/cli/optional.yaml']
         argv_config = Config(
             'Example parser',
             [
                 SMI_PROFILES_ARGUMENT,
                 SMI_CONFIG_PATHS_ARGUMENT,
-                SMI_OPTIONAL_CONFIG_FILE_PATH_ARGUMENT
+                SMI_OPTIONAL_CONFIG_FILES_ARGUMENT
             ])
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, ['profile1', 'profile2'])
@@ -168,7 +171,7 @@ class TestFoo(unittest.TestCase):
     def test_init_environment_profiles(self):
         set_environment_variable("SMI_PROFILES", "profileX,profileY")
         set_environment_variable("SMI_CONFIG_PATHS", "./test/resources/env")
-        set_environment_variable("SMI_OPTIONAL_CONFIG_FILE", "./test/resources/env/optional.yaml")
+        set_environment_variable("SMI_OPTIONAL_CONFIG_FILES", "./test/resources/env/optional.yaml")
         argv = ["example_application_name.py"]
         argv_config = Config(
             'Example parser',

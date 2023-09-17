@@ -3,7 +3,7 @@ import unittest
 from info.setmy.string.operations import find_named_placeholders, replace_named_placeholder, combined_list
 
 
-class TestFoo(unittest.TestCase):
+class TestOperations(unittest.TestCase):
     def test_find_named_placeholders(self):
         placeholders_text = "abc ${def} ghi ${jkl} mno ${prs}"
         result = find_named_placeholders(placeholders_text)

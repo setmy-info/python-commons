@@ -6,7 +6,7 @@ from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT
 from info.setmy.arguments.parser import parse_arguments
 
 
-class TestFoo(unittest.TestCase):
+class TestParser(unittest.TestCase):
 
     def test_parse_arguments(self):
         argv = ["example_application_name.py", '-i', 'input.txt', '-o', 'output.txt', '--smi-profiles',
