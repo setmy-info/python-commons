@@ -50,7 +50,7 @@ class Application:
         )
         self.application_files = self.default_application_files + application_profiles_files
         optional_env_application_files = get_environment_variables_list(SMI_OPTIONAL_CONFIG_FILES)
-        optional_cli_application_files = self.get_cli_optional_config_file_path()
+        optional_cli_application_files = self.get_cli_optional_config_files()
         self.applications_files_paths = list(
             map(
                 lambda item: [item, self.parse_file_by_type(item)],
@@ -80,7 +80,7 @@ class Application:
             return self.arguments.smi_config_paths
         return []
 
-    def get_cli_optional_config_file_path(self):
+    def get_cli_optional_config_files(self):
         if hasattr(self.arguments,
                    "smi_optional_config_files") and self.arguments.smi_optional_config_files is not None:
             return self.arguments.smi_optional_config_files
