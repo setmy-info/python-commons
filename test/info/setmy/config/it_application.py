@@ -1,10 +1,10 @@
 import unittest
 
-from info.setmy.arguments.config import Config
-from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT, SMI_CONFIG_PATHS_ARGUMENT, \
+from smi_python_commons.arguments.config import Config
+from smi_python_commons.arguments.constants import SMI_PROFILES_ARGUMENT, SMI_CONFIG_PATHS_ARGUMENT, \
     SMI_OPTIONAL_CONFIG_FILES_ARGUMENT
-from info.setmy.config.application import Application, find_last_not_none_and_empty
-from info.setmy.environment.variables import set_environment_variable, delete_environment_variable
+from smi_python_commons.config.application import Application, find_last_not_none_and_empty
+from smi_python_commons.environment.variables import set_environment_variable, delete_environment_variable
 
 
 class IntegrationTestApplication(unittest.TestCase):

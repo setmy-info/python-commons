@@ -2,16 +2,16 @@ import os
 import re
 from functools import reduce
 
-from info.setmy.arguments.config import Config
-from info.setmy.arguments.parser import parse_arguments
-from info.setmy.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, \
+from smi_python_commons.arguments.config import Config
+from smi_python_commons.arguments.parser import parse_arguments
+from smi_python_commons.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, \
     SMI_OPTIONAL_CONFIG_FILES, \
     APPLICATION_FILE_PREFIXES
-from info.setmy.environment.variables import get_environment_variables_list, get_environment_variable
-from info.setmy.json.parser import parse_json_file
-from info.setmy.string.operations import combined_list, combined_by_function_list, find_named_placeholders, \
+from smi_python_commons.environment.variables import get_environment_variables_list, get_environment_variable
+from smi_python_commons.json.parser import parse_json_file
+from smi_python_commons.string.operations import combined_list, combined_by_function_list, find_named_placeholders, \
     replace_named_placeholder
-from info.setmy.yaml.parser import parse_yaml_file
+from smi_python_commons.yaml.parser import parse_yaml_file
 
 
 class Application:

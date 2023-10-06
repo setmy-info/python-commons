@@ -1,6 +1,6 @@
 import os
 
-from info.setmy.string.operations import trim_list, to_boolean, to_int, to_float, json_to_object
+from smi_python_commons.string.operations import trim_list, to_boolean, to_int, to_float, json_to_object
 
 
 def set_environment_variable(variable_name: str, variable_value: str):

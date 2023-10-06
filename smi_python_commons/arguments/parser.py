@@ -1,6 +1,6 @@
 import argparse
 
-from info.setmy.arguments.config import Config, ConfigBase, SubCommandsConfig
+from smi_python_commons.arguments.config import Config, ConfigBase, SubCommandsConfig
 
 
 def parse_arguments(argv, argv_config: ConfigBase):

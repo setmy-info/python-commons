@@ -57,3 +57,7 @@ python -m unittest discover -s ./test/info/setmy && python -m unittest discover 
 python setup.py sdist bdist_wheel
 twine upload dist/*
 ```
+
+```shell
+python setup.py sdist bdist_wheel && twine upload dist/*
+```

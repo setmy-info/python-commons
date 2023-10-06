@@ -1,6 +1,6 @@
 from abc import ABC
 
-from info.setmy.arguments.argument import Argument
+from smi_python_commons.arguments.argument import Argument
 
 
 class ConfigBase(ABC):

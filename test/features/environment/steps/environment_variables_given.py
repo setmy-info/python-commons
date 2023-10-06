@@ -1,6 +1,6 @@
 from behave import *
 
-from info.setmy.environment.variables import set_environment_variable
+from smi_python_commons.environment.variables import set_environment_variable
 
 
 @given('environment variable "{variable_name}" have value "{variable_value}"')

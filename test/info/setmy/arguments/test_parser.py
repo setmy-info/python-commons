@@ -1,9 +1,9 @@
 import unittest
 
-from info.setmy.arguments.argument import Argument
-from info.setmy.arguments.config import Config
-from info.setmy.arguments.constants import SMI_PROFILES_ARGUMENT
-from info.setmy.arguments.parser import parse_arguments
+from smi_python_commons.arguments.argument import Argument
+from smi_python_commons.arguments.config import Config
+from smi_python_commons.arguments.constants import SMI_PROFILES_ARGUMENT
+from smi_python_commons.arguments.parser import parse_arguments
 
 
 class TestParser(unittest.TestCase):

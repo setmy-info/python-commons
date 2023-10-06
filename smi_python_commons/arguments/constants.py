@@ -1,5 +1,5 @@
-from info.setmy.arguments.argument import Argument
-from info.setmy.string.operations import split_and_trim
+from smi_python_commons.arguments.argument import Argument
+from smi_python_commons.string.operations import split_and_trim
 
 SMI_PROFILES_ARGUMENT = Argument('smi-profiles', 'p', split_and_trim,
                                  'Comma separated profiles string.', False)

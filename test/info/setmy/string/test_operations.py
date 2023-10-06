@@ -1,6 +1,6 @@
 import unittest
 
-from info.setmy.string.operations import find_named_placeholders, replace_named_placeholder, combined_list
+from smi_python_commons.string.operations import find_named_placeholders, replace_named_placeholder, combined_list
 
 
 class TestOperations(unittest.TestCase):
