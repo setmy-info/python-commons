@@ -6,7 +6,7 @@ from smi_python_commons.arguments.config import Config
 from smi_python_commons.arguments.parser import parse_arguments
 from smi_python_commons.config.constants import SMI_CONFIG_PATHS, SMI_PROFILES, APPLICATION_FILE_SUFFIXES, \
     SMI_OPTIONAL_CONFIG_FILES, \
-    APPLICATION_FILE_PREFIXES
+    APPLICATION_FILE_PREFIXES, SMI_NAME
 from smi_python_commons.environment.variables import get_environment_variables_list, get_environment_variable
 from smi_python_commons.json.parser import parse_json_file
 from smi_python_commons.string.operations import combined_list, combined_by_function_list, find_named_placeholders, \
@@ -17,7 +17,6 @@ from smi_python_commons.yaml.parser import parse_yaml_file
 class Application:
 
     def __init__(self, argv: [str], argv_config: Config):
-        self.name = "default"
         self.argv = argv
         self.argv_config = argv_config
         self.arguments = parse_arguments(self.argv, self.argv_config)
@@ -75,6 +74,12 @@ class Application:
             ),
             {}  # initial value
         )
+        self.name = "default" or get_environment_variable(SMI_NAME) or self.merged_config["name"] or self.get_cli_name()
+
+    def get_cli_name(self):
+        if hasattr(self.arguments, "smi_name") and self.arguments.smi_name is not None:
+            return self.arguments.smi_name
+        return []
 
     def get_cli_config_paths(self):
         if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:
