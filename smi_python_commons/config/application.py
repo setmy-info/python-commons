@@ -17,6 +17,7 @@ from smi_python_commons.yaml.parser import parse_yaml_file
 class Application:
 
     def __init__(self, argv: [str], argv_config: Config):
+        self.name = "default"
         self.argv = argv
         self.argv_config = argv_config
         self.arguments = parse_arguments(self.argv, self.argv_config)
