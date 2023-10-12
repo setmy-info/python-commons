@@ -64,7 +64,7 @@ VERSION=0.3.1
 python smi_python_commons/scm_version.py %NAME% %VERSION%
 # *nix
 python smi_python_commons/scm_version.py ${NAME} ${VERSION}
-git add ./smi_python_commons/project.py
+git add ./${NAME}/project.py
 git commit -m "project.py updated"
 ```
 
