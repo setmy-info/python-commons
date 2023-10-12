@@ -9,9 +9,10 @@ def main():
         return
     name = sys.argv[1]
     version = sys.argv[2]
+    current_directory = os.getcwd()
     try:
         git_hash = subprocess.check_output(["git", "rev-parse", "HEAD"]).strip().decode("utf-8")
-        with open(os.path.join(os.path.dirname(__file__), name, 'project.py'), 'w') as file:
+        with open(os.path.join(current_directory, name, 'project.py'), 'w') as file:
             file.write(f'NAME = "{name}"\n')
             file.write(f'VERSION = "{version}"\n')
             file.write(f'HASH = "{git_hash}"\n')
