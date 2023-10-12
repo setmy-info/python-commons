@@ -56,10 +56,10 @@ python -m unittest discover -s ./test/info/setmy && python -m unittest discover 
 ```shell
 # Win
 set NAME=smi_python_commons
-set VERSION=0.3.1
+set VERSION=0.3.2
 # *nix
 NAME=smi_python_commons
-VERSION=0.3.1
+VERSION=0.3.2
 # Win
 python smi_python_commons/scm_version.py %NAME% %VERSION%
 # *nix

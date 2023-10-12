@@ -74,12 +74,22 @@ class Application:
             ),
             {}  # initial value
         )
-        self.name = self.get_cli_name() or get_environment_variable(SMI_NAME) or self.merged_config["name"] or "default"
+        self.name = (
+            self.get_cli_name() or
+            get_environment_variable(SMI_NAME) or
+            self.get_merged_config_app_name()
+            or "default"
+        )
 
     def get_cli_name(self):
         if hasattr(self.arguments, "smi_name") and self.arguments.smi_name is not None:
             return self.arguments.smi_name
-        return []
+        return None
+
+    def get_merged_config_app_name(self):
+        if hasattr(self.merged_config, "application") and self.merged_config["application"] is not None:
+            return self.merged_config["application"]["name"]
+        return None
 
     def get_cli_config_paths(self):
         if hasattr(self.arguments, "smi_config_paths") and self.arguments.smi_config_paths is not None:

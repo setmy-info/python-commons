@@ -30,6 +30,7 @@ class IntegrationTestApplication(unittest.TestCase):
             ])
         app = Application(argv, argv_config)
         self.assertEqual(app.profiles_list, [])
+        self.assertEqual(app.name, "default")
         self.assertEqual(app.default_application_files, ['application.json', 'application.yml', 'application.yaml'])
         self.assertEqual(app.application_files, ['application.json', 'application.yml', 'application.yaml'])
         self.assertEqual(app.config_paths, ['./test/resources', './resources'])
