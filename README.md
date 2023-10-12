@@ -54,7 +54,16 @@ python -m unittest discover -s ./test/info/setmy && python -m unittest discover 
 ### Update version info
 
 ```shell
-python scm_version.py
+# Win
+set NAME=smi_python_commons
+set VERSION=0.3.1
+# *nix
+NAME=smi_python_commons
+VERSION=0.3.1
+# Win
+python smi_python_commons/scm_version.py %NAME% %VERSION%
+# *nix
+python smi_python_commons/scm_version.py ${NAME} ${VERSION}
 git add ./smi_python_commons/project.py
 git commit -m "project.py updated"
 ```
