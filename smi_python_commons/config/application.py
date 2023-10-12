@@ -87,8 +87,9 @@ class Application:
         return None
 
     def get_merged_config_app_name(self):
-        if hasattr(self.merged_config, "application") and self.merged_config["application"] is not None:
-            return self.merged_config["application"]["name"]
+        application = self.merged_config.get("application", None)
+        if application is not None:
+            return application.get("name")
         return None
 
     def get_cli_config_paths(self):
