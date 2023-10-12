@@ -66,6 +66,7 @@ python smi_python_commons/scm_version.py %NAME% %VERSION%
 python smi_python_commons/scm_version.py ${NAME} ${VERSION}
 git add ./${NAME}/project.py
 git commit -m "project.py updated"
+git push
 ```
 
 ## Deploy
