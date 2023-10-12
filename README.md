@@ -73,7 +73,7 @@ git commit -m "project.py updated"
 ```shell
 python setup.py sdist bdist_wheel
 twine upload dist/*
-git tag -a 0.3.1 -m "0.3.1"
+git tag -a ${VERSION} -m "${VERSION}"
 git push --tags
 ```
 
