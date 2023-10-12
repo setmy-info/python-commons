@@ -1,8 +1,10 @@
 from setuptools import setup, find_packages
 
+from smi_python_commons.project import NAME, VERSION
+
 setup(
-    name='smi_python_commons',
-    version='0.3.0',
+    name=NAME,
+    version=VERSION,
     description='setmy.info python commons library.',
     long_description='setmy.info python commons library.',
     author='Imre Tabur',

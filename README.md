@@ -51,12 +51,27 @@ behave
 python -m unittest discover -s ./test/info/setmy && python -m unittest discover -s ./test/info/setmy -p it_*.py && behave
 ```
 
+### Update version info
+
+```shell
+python scm_version.py
+git add ./smi_python_commons/project.py
+git commit -m "project.py updated"
+```
+
 ## Deploy
 
 ```shell
 python setup.py sdist bdist_wheel
 twine upload dist/*
+git tag -a 0.3.1 -m "0.3.1"
+git push --tags
 ```
+
+## Release
+
+1. Update version info
+2. Deploy
 
 ```shell
 python setup.py sdist bdist_wheel && twine upload dist/*
