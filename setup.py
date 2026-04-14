@@ -13,6 +13,6 @@ setup(
     url='https://github.com/setmy-info/python-commons',
     packages=find_packages(),
     install_requires=[
-        "pyyaml==6.0.1"
+        "pyyaml==6.0.3"
     ],
 )

@@ -1,3 +1,3 @@
 NAME = "smi_python_commons"
-VERSION = "0.3.3"
-HASH = "2b59180dffd62b855e576bf150d6d7209205d70e"
+VERSION = "0.4.0"
+HASH = "6e0d5f3f7fe0d335ac076a553b8a91c3b2c9d8c0"

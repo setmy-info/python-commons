@@ -6,7 +6,7 @@
 
 ```shell
 # Win
-py -3.9 -m venv ./.venv
+py -3.14 -m venv ./.venv
 # *nix
 python -m venv ./.venv
 # Win
@@ -17,15 +17,15 @@ python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-For developing depending project/module, dependency can be added into **requirements.txt** as:
+For developing depending on project/module, dependency can be added into **requirements.txt** as:
 
     python-commons @ file:///C:/sources/setmy.info/submodules/python-commons
 
 ### PyCharm
 
-"File" -> "Settings" -> Python Integrated Tools -> Default test runner: Unittest
+"File" → "Settings" → Python Integrated Tools → Default test runner: Unittest
 
-Running tests have a problem: working directory has to be set for tests.
+Running tests has a problem: a working directory has to be set for tests.
 
 ### Run unit tests
 
@@ -56,10 +56,10 @@ python -m unittest discover -s ./test/info/setmy && python -m unittest discover 
 ```shell
 # Win
 set NAME=smi_python_commons
-set VERSION=0.3.3
+set VERSION=0.4.0
 # *nix
 NAME=smi_python_commons
-VERSION=0.3.3
+VERSION=0.4.0
 # Win
 python smi_python_commons/scm_version.py %NAME% %VERSION%
 # *nix
@@ -67,6 +67,11 @@ python smi_python_commons/scm_version.py ${NAME} ${VERSION}
 git add ./${NAME}/project.py
 git commit -m "project.py updated"
 git push
+```
+
+## Upgrade
+```shell
+pip install --upgrade behave pyyaml wheel twine pip-audit bandit
 ```
 
 ## Deploy
