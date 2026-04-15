@@ -21,6 +21,12 @@ For developing depending on the project / module, dependency can be added into *
 
     python-commons @ file:///C:/sources/setmy.info/submodules/python-commons
 
+## Upgrade
+
+```shell
+pip install --upgrade behave pyyaml wheel twine pip_audit bandit
+```
+
 ### PyCharm
 
 "File" → "Settings" → Python Integrated Tools → Default test runner: Unittest
@@ -69,10 +75,61 @@ git commit -m "project.py updated"
 git push
 ```
 
-## Upgrade
+## setup.py
+
+`setup.py` is the **package distribution configuration** file. It makes this project an installable Python package that
+can be:
+
+- Built into a distributable artifact (`.whl` / `.tar.gz`)
+- Installed locally via `pip install .`
+- Published to PyPI (or a private registry)
+
+### What each part does
+
+| Field                      | Value                                             | Meaning                                 |
+|----------------------------|---------------------------------------------------|-----------------------------------------|
+| `name`                     | `NAME` from `project.py`                          | Package name on PyPI                    |
+| `version`                  | `VERSION` from `project.py`                       | Package version                         |
+| `packages=find_packages()` | auto-detected                                     | Includes all sub-packages               |
+| `install_requires`         | `smi-python-commons==0.4.0`                       | Runtime dependency                      |
+| `extras_require[dev]`      | `bandit`, `behave`, `pip_audit`, `wheel`, `twine` | Dev/build tools (from requirements.txt) |
+
+### How to use it
+
+**Build the package:**
+
 ```shell
-pip install --upgrade behave pyyaml wheel twine pip-audit bandit
+python setup.py sdist bdist_wheel
+# or with modern tooling:
+pip install build && python -m build
 ```
+
+**Install locally (editable/dev mode):**
+
+```shell
+pip install -e .
+```
+
+**Install locally with dev dependencies:**
+
+```shell
+pip install -e .[dev]
+```
+
+**Install normally:**
+
+```shell
+pip install .
+```
+
+**Publish to PyPI:**
+
+```shell
+twine upload dist/*
+```
+
+> **Note:** `setup.py` is the legacy way (pre-PEP 517). Modern projects use `pyproject.toml` with
+> `[build-system]` + `[project]` sections instead, but `setup.py` still works fine and is widely supported.
 
 ## Deploy
 
