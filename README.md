@@ -91,7 +91,7 @@ can be:
 | `name`                     | `NAME` from `project.py`                          | Package name on PyPI                    |
 | `version`                  | `VERSION` from `project.py`                       | Package version                         |
 | `packages=find_packages()` | auto-detected                                     | Includes all sub-packages               |
-| `install_requires`         | `smi-python-commons==0.4.0`                       | Runtime dependency                      |
+| `install_requires`         | `pyyaml==6.0.3`                                   | Runtime dependency                      |
 | `extras_require[dev]`      | `bandit`, `behave`, `pip_audit`, `wheel`, `twine` | Dev/build tools (from requirements.txt) |
 
 ### How to use it
