@@ -1,5 +1,30 @@
 # python-commons
 
+# python-runner
+
+`python-runner` (part of `python-commons`) is a configuration management utility designed to simplify application setup by aggregating configurations from multiple sources.
+
+### How it Works
+
+The core of `python-runner` is the `Application` class, which automates the following process:
+
+1.  **Argument Parsing**: It uses a custom `Config` and `Argument` structure to parse command-line arguments (using `argparse` under the hood).
+2.  **Configuration Discovery**: It searches for configuration files (`application.json`, `application.yml`, `application.yaml`) in a prioritized list of paths:
+    -   Static paths: `./test/resources`, `./resources`.
+    -   Environment variables: Defined in `SMI_CONFIG_PATHS`.
+    -   Command line: Provided via `--smi-config-paths`.
+3.  **Profile Support**: It supports profiles (e.g., `dev`, `prod`). If profiles are active, it also looks for profile-specific files like `application-dev.yaml`. Profiles are loaded from environment variable `SMI_PROFILES` or command line `--smi-profiles`.
+4.  **Hierarchical Merging**: All discovered configuration files are parsed (JSON or YAML) and merged into a single `merged_config` dictionary. Files found later in the search order (CLI > Env > Default) override values from earlier ones.
+5.  **Placeholder Interpolation**: It automatically replaces placeholders like `${MY_VAR}` in configuration files with values from environment variables.
+6.  **Application Naming**: It determines the application name based on CLI arguments, environment variables, or the merged configuration itself.
+
+### Why it is Useful
+
+-   **Centralized Configuration**: Provides a unified way to manage settings across different environments without hardcoding values.
+-   **Environment Awareness**: Seamlessly integrates with environment variables for secrets and environment-specific overrides.
+-   **Flexibility**: Supports multiple formats (JSON, YAML) and multiple source types (Files, Env, CLI).
+-   **Boilerplate Reduction**: Eliminates the need to manually write code for parsing arguments, reading files, and merging nested dictionaries for every new project.
+
 ## Development
 
 ### Preparations
